@@ -56,6 +56,7 @@ async function main() {
 
 main()
   .then(async () => {
+    // eslint-disable-next-line no-console
     console.log('DISSCONNECTED');
     await prisma.$disconnect();
   })

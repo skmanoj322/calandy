@@ -18,11 +18,10 @@ export const isDateLieInWorkingDay = (date: string, workingDays: number[]) => {
   };
 };
 
-const timeSlotGenerator = (
-  workingHours: any,
+export const timeSlotGenerator = (
+  workingHours: { startTime: string; endTime: string },
   slotSize: number,
-  bookedSlots: { id: number; startTime: string; endTime: string }[],
-  date: string
+  bookedSlots: { id: number; startTime: string; endTime: string }[]
 ) => {
   const { startTime, endTime } = workingHours;
 
@@ -54,7 +53,7 @@ const timeSlotGenerator = (
   return avilableSlots;
 };
 
-const isPresent = (time: string) => {
+export const isPresent = (time: string) => {
   const inputTime = dayjs(time);
   const now = dayjs();
   return inputTime.isAfter(now);

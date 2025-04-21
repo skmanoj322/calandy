@@ -39,7 +39,7 @@ export const createBooking = async ({
 }) => {
   try {
     const event = await getEventById({ eventId });
-    let guestIds = [];
+    const guestIds = [];
     for (const username of usernames) {
       const userDetails = await getUserByUserName({ username });
       if (userDetails?.id) {

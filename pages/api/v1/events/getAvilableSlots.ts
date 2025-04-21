@@ -20,16 +20,15 @@ type TIMESLOT = {
 
 const getAvilableSlots = async (req: NextApiRequest, res: NextApiResponse) => {
   const { startTime, endTime, eventId } = req.query;
-  console.log('INIT', startTime, endTime, eventId);
 
-  if (typeof startTime !== 'string' || typeof eventId !== 'string') {
+  if (typeof startTime !== 'string' || typeof eventId !== 'string' || Array.isArray(endTime)) {
     return res.status(400).send({
       message: 'Invalid params',
       status: false,
     });
   }
 
-  let initialStartTime = dayjs(startTime);
+  const initialStartTime = dayjs(startTime);
   const bookedSlot = await getBookedSlots({ eventId });
 
   if (!bookedSlot) {
@@ -62,7 +61,6 @@ const getAvilableSlots = async (req: NextApiRequest, res: NextApiResponse) => {
       endTime: workingHours.userConstraints.endTime,
       startTime: workingHours.userConstraints.startTime,
     },
-    // @ts-ignore
     endTime,
   });
 
@@ -129,7 +127,7 @@ export const timeSlotFilterHandler = ({
   booking: { startTime: string; endTime: string; id: number }[];
   workingHours: { startTime: string; endTime: string; days: string };
 }) => {
-  let timeSlot: TIMESLOT = { slotSize, slots: [] };
+  const timeSlot: TIMESLOT = { slotSize, slots: [] };
   const defaultEndTime = endTime
     ? endTime
     : `${initialStartTime.format('YYYY-MM-DD')}T${workingHours.endTime}`;

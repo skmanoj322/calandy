@@ -20,7 +20,6 @@ export const getAlltheGuest = async ({ bookingId }: { bookingId: string }) => {
         },
       },
     });
-    console.log('getAllguestFromBooking', getAlltheguestFromBooking);
 
     return responseWrapper({
       data: getAlltheguestFromBooking,

@@ -1,4 +1,4 @@
-type ResponseWrapper<T> = {
+export type ResponseWrapper<T> = {
   status: string;
   message: string;
   response: {

@@ -1,4 +1,4 @@
-import { NextApiRequest } from "next";
+import { NextApiRequest } from 'next';
 
 /**
  * Extracts the `userId` and `username` from the request headers.
@@ -13,8 +13,8 @@ import { NextApiRequest } from "next";
  */
 
 export const extractUserIdfromreq = (req: NextApiRequest) => {
-	const userId = req.headers["user_id"] as string;
-	const username = req.headers["username"];
+  const userId = req.headers['user_id'] as string;
+  const username = req.headers['username'];
 
-	return { userId: Number(userId), username };
+  return { userId: Number(userId), username };
 };

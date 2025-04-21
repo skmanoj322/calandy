@@ -1,4 +1,4 @@
-import dayjs from "dayjs";
+import dayjs from 'dayjs';
 
 /**
  * Validates whether a given time slot is valid by checking:
@@ -22,22 +22,22 @@ import dayjs from "dayjs";
  */
 
 export const checkSlotValidation = ({
-	startTime,
-	endTime,
-	slotSize,
+  startTime,
+  endTime,
+  slotSize,
 }: {
-	startTime: string;
-	endTime: string;
-	slotSize: number;
+  startTime: string;
+  endTime: string;
+  slotSize: number;
 }) => {
-	if (!dayjs(startTime).isBefore(endTime)) {
-		return false;
-	}
-	const start = dayjs(startTime);
-	const end = dayjs(endTime);
-	const diffInMinute = end.diff(start, "minute");
-	if (diffInMinute === Number(slotSize)) {
-		return true;
-	}
-	return false;
+  if (!dayjs(startTime).isBefore(endTime)) {
+    return false;
+  }
+  const start = dayjs(startTime);
+  const end = dayjs(endTime);
+  const diffInMinute = end.diff(start, 'minute');
+  if (diffInMinute === Number(slotSize)) {
+    return true;
+  }
+  return false;
 };

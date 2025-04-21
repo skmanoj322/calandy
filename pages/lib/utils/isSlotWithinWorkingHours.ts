@@ -1,6 +1,6 @@
-import dayjs from "dayjs";
-import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
-import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
+import dayjs from 'dayjs';
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 dayjs.extend(isSameOrAfter);
 dayjs.extend(isSameOrBefore);
 
@@ -28,37 +28,34 @@ dayjs.extend(isSameOrBefore);
  */
 
 export const isSlotWithinWorkingTime = ({
-	startTime,
-	endTime,
-	workingDays,
-	workingStart,
-	workingEnd,
+  startTime,
+  endTime,
+  workingDays,
+  workingStart,
+  workingEnd,
 }: {
-	startTime: string;
-	endTime: string;
-	workingDays: number[];
-	workingStart: string;
-	workingEnd: string;
+  startTime: string;
+  endTime: string;
+  workingDays: number[];
+  workingStart: string;
+  workingEnd: string;
 }) => {
-	const start = dayjs(startTime);
-	const end = dayjs(endTime);
-	const dayOfWeek = start.day();
-	const dateStr = start.format("YYYY-MM-DD");
-	const workingStartTime = dayjs(`${dateStr}T${workingStart}`);
-	const workingEndTime = dayjs(`${dateStr}T${workingEnd}`);
-	if (!isWorkingDay({ workingDays, dayOfWeek })) return false;
-	return (
-		start.isSameOrAfter(workingStartTime) &&
-		end.isSameOrBefore(workingEndTime)
-	);
+  const start = dayjs(startTime);
+  const end = dayjs(endTime);
+  const dayOfWeek = start.day();
+  const dateStr = start.format('YYYY-MM-DD');
+  const workingStartTime = dayjs(`${dateStr}T${workingStart}`);
+  const workingEndTime = dayjs(`${dateStr}T${workingEnd}`);
+  if (!isWorkingDay({ workingDays, dayOfWeek })) return false;
+  return start.isSameOrAfter(workingStartTime) && end.isSameOrBefore(workingEndTime);
 };
 export const isWorkingDay = ({
-	workingDays,
-	dayOfWeek,
+  workingDays,
+  dayOfWeek,
 }: {
-	workingDays: number[];
-	dayOfWeek: number;
+  workingDays: number[];
+  dayOfWeek: number;
 }) => {
-	if (!workingDays.includes(dayOfWeek)) return false;
-	return true;
+  if (!workingDays.includes(dayOfWeek)) return false;
+  return true;
 };

@@ -1,9 +1,9 @@
-import { prisma } from "@/prisma";
+import { prisma } from '@/prisma';
 
 export type SetWorkingHoursPayload = {
-	days: string;
-	startTime: string;
-	endTime: string;
+  days: string;
+  startTime: string;
+  endTime: string;
 };
 /**
  * Updates a user's working hours, including start time, end time, and working days.
@@ -30,32 +30,32 @@ export type SetWorkingHoursPayload = {
  */
 
 export const setWorkingHours = async ({
-	userId,
-	payload,
+  userId,
+  payload,
 }: {
-	userId: number;
-	payload: SetWorkingHoursPayload;
+  userId: number;
+  payload: SetWorkingHoursPayload;
 }) => {
-	const setNewWorking = await prisma.user.update({
-		where: { id: userId },
-		data: {
-			userConstraints: {
-				update: {
-					...payload,
-				},
-			},
-		},
-		select: {
-			username: true,
-			userConstraints: {
-				select: {
-					days: true,
-					startTime: true,
-					endTime: true,
-				},
-			},
-		},
-	});
+  const setNewWorking = await prisma.user.update({
+    where: { id: userId },
+    data: {
+      userConstraints: {
+        update: {
+          ...payload,
+        },
+      },
+    },
+    select: {
+      username: true,
+      userConstraints: {
+        select: {
+          days: true,
+          startTime: true,
+          endTime: true,
+        },
+      },
+    },
+  });
 
-	return setNewWorking;
+  return setNewWorking;
 };

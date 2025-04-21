@@ -1,20 +1,19 @@
-import { isSlotWithinWorkingTime } from "@/pages/lib/utils/isSlotWithinWorkingHours";
-import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
+import { isSlotWithinWorkingTime } from '@/pages/lib/utils/isSlotWithinWorkingHours';
+import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
 
 const handler = (req: NextApiRequest, res: NextApiResponse) => {
-	const { startTime, endTime, workingDays, workingEnd, workingStart } =
-		req.body;
+  const { startTime, endTime, workingDays, workingEnd, workingStart } = req.body;
 
-	console.log(startTime, endTime);
-	const result = isSlotWithinWorkingTime({
-		startTime,
-		endTime,
-		workingDays,
-		workingEnd,
-		workingStart,
-	});
+  console.log(startTime, endTime);
+  const result = isSlotWithinWorkingTime({
+    startTime,
+    endTime,
+    workingDays,
+    workingEnd,
+    workingStart,
+  });
 
-	res.send(result);
+  res.send(result);
 };
 
 export default handler;

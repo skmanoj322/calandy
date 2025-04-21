@@ -1,4 +1,4 @@
-import dayjs from "dayjs";
+import dayjs from 'dayjs';
 
 /**
  * Checks if two time intervals overlap.
@@ -22,17 +22,17 @@ import dayjs from "dayjs";
  */
 
 export const timeOverLap = ({
-	startTime1,
-	endTime1,
-	startTime2,
-	endTime2,
+  startTime1,
+  endTime1,
+  startTime2,
+  endTime2,
 }: {
-	startTime1: string;
-	endTime1: string;
-	startTime2: string;
-	endTime2: string;
+  startTime1: string;
+  endTime1: string;
+  startTime2: string;
+  endTime2: string;
 }) => {
-	const s1 = dayjs(startTime1).isBefore(endTime2);
-	const s2 = dayjs(startTime2).isBefore(endTime1);
-	return s1 && s2;
+  const s1 = dayjs(startTime1).isBefore(endTime2);
+  const s2 = dayjs(startTime2).isBefore(endTime1);
+  return s1 && s2;
 };

@@ -1,8 +1,8 @@
-import { prisma } from "@/prisma";
+import { prisma } from '@/prisma';
 export type EventTypePayload = {
-	title?: string;
-	description?: string;
-	slotSize?: number;
+  title?: string;
+  description?: string;
+  slotSize?: number;
 };
 
 /**
@@ -29,20 +29,20 @@ export type EventTypePayload = {
  */
 
 export const editEvent = async ({
-	eventId,
-	payload,
+  eventId,
+  payload,
 }: {
-	eventId: string;
-	payload: EventTypePayload;
+  eventId: string;
+  payload: EventTypePayload;
 }) => {
-	const editedEvent = await prisma.event.update({
-		where: { eventId },
-		data: {
-			...(payload.slotSize && { slotSize: payload.slotSize }),
-			...(payload.description && { description: payload.description }),
-			...(payload.title && { title: payload.title }),
-		},
-	});
+  const editedEvent = await prisma.event.update({
+    where: { eventId },
+    data: {
+      ...(payload.slotSize && { slotSize: payload.slotSize }),
+      ...(payload.description && { description: payload.description }),
+      ...(payload.title && { title: payload.title }),
+    },
+  });
 
-	return editedEvent;
+  return editedEvent;
 };

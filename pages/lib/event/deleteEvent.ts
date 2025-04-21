@@ -1,4 +1,4 @@
-import { prisma } from "@/prisma";
+import { prisma } from '@/prisma';
 
 /**
  * Deletes an event from the database based on the provided event ID.
@@ -18,14 +18,14 @@ import { prisma } from "@/prisma";
  */
 
 export const deleteEventbyId = async ({ eventId }: { eventId: string }) => {
-	try {
-		const deleteEvent = await prisma.event.delete({
-			where: {
-				eventId,
-			},
-		});
-		return deleteEvent;
-	} catch (error) {
-		return error;
-	}
+  try {
+    const deleteEvent = await prisma.event.delete({
+      where: {
+        eventId,
+      },
+    });
+    return deleteEvent;
+  } catch (error) {
+    return error;
+  }
 };

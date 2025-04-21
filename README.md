@@ -94,37 +94,37 @@ DATABASE_URL=postgresql://postgres:postgres@localhost:5432/postgres
 
 To maintain consistency and clarity in version control, follow this branching strategy:
 
--   For features:
+- For features:
 
 ```
     feature/<feature_name>
 ```
 
--   For issues:
-    ```
-    issue/<issue_number>
-    ```
+- For issues:
+  ```
+  issue/<issue_number>
+  ```
 
 #### ✅ Example Workflow
 
 1. Create a branch:
 
-    ```bash
-    git checkout -b feature/user-authentication
-    ```
+   ```bash
+   git checkout -b feature/user-authentication
+   ```
 
 2. Add and commit your changes:
 
-    ```bash
-    git add .
-    git commit -m "Initial commit for user authentication feature"
-    ```
+   ```bash
+   git add .
+   git commit -m "Initial commit for user authentication feature"
+   ```
 
 3. Push the branch:
 
-    ```bash
-    git push origin calandly/feature/user-authentication
-    ```
+   ```bash
+   git push origin calandly/feature/user-authentication
+   ```
 
 4. Create a pull request (PR) and request a review.
 

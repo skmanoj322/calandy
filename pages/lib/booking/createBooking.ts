@@ -1,7 +1,7 @@
-import { prisma } from "@/prisma";
-import { responseWrapper } from "../utils/responseWrapper";
-import { getEventById } from "../event/getEventbyEventId";
-import { getUserByUserName } from "../getUserByUserName";
+import { prisma } from '@/prisma';
+import { responseWrapper } from '../utils/responseWrapper';
+import { getEventById } from '../event/getEventbyEventId';
+import { getUserByUserName } from '../getUserByUserName';
 
 /**
  * Creates a new booking for an event by associating multiple users (guests).
@@ -27,50 +27,50 @@ import { getUserByUserName } from "../getUserByUserName";
  */
 
 export const createBooking = async ({
-	usernames,
-	eventId,
-	startTime,
-	endTime,
+  usernames,
+  eventId,
+  startTime,
+  endTime,
 }: {
-	usernames: string[];
-	eventId: string;
-	startTime: string;
-	endTime: string;
+  usernames: string[];
+  eventId: string;
+  startTime: string;
+  endTime: string;
 }) => {
-	try {
-		const event = await getEventById({ eventId });
-		let guestIds = [];
-		for (const username of usernames) {
-			const userDetails = await getUserByUserName({ username });
-			if (userDetails?.id) {
-				guestIds.push(userDetails.id);
-			}
-		}
-		if (!event) {
-			return {
-				response: {},
-				message: "no event is present please check the eventId",
-				status: false,
-			};
-		}
-		const newBooking = await bookingGuest({
-			eventId: event?.id,
-			startTime,
-			endTime,
-			guestIds,
-		});
-		return responseWrapper({
-			status: true,
-			data: newBooking,
-			message: "",
-		});
-	} catch (error) {
-		return responseWrapper({
-			status: false,
-			data: {},
-			message: `${error}`,
-		});
-	}
+  try {
+    const event = await getEventById({ eventId });
+    let guestIds = [];
+    for (const username of usernames) {
+      const userDetails = await getUserByUserName({ username });
+      if (userDetails?.id) {
+        guestIds.push(userDetails.id);
+      }
+    }
+    if (!event) {
+      return {
+        response: {},
+        message: 'no event is present please check the eventId',
+        status: false,
+      };
+    }
+    const newBooking = await bookingGuest({
+      eventId: event?.id,
+      startTime,
+      endTime,
+      guestIds,
+    });
+    return responseWrapper({
+      status: true,
+      data: newBooking,
+      message: '',
+    });
+  } catch (error) {
+    return responseWrapper({
+      status: false,
+      data: {},
+      message: `${error}`,
+    });
+  }
 };
 
 /**
@@ -93,28 +93,23 @@ export const createBooking = async ({
  * });
  */
 
-const bookingGuest = async ({
-	eventId,
-	startTime,
-	endTime,
-	guestIds,
-}: CreateBooking) => {
-	const newBooking = await prisma.booking.create({
-		data: {
-			eventId,
-			startTime,
-			endTime,
-			...(guestIds &&
-				guestIds?.length > 0 && {
-					bookingGuest: {
-						createMany: {
-							data: guestIds.map((id) => ({
-								guestId: id,
-							})),
-						},
-					},
-				}),
-		},
-	});
-	return newBooking;
+const bookingGuest = async ({ eventId, startTime, endTime, guestIds }: CreateBooking) => {
+  const newBooking = await prisma.booking.create({
+    data: {
+      eventId,
+      startTime,
+      endTime,
+      ...(guestIds &&
+        guestIds?.length > 0 && {
+          bookingGuest: {
+            createMany: {
+              data: guestIds.map((id) => ({
+                guestId: id,
+              })),
+            },
+          },
+        }),
+    },
+  });
+  return newBooking;
 };

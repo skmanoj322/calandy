@@ -1,7 +1,7 @@
-import dayjs from "dayjs";
-import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
-import utc from "dayjs/plugin/utc";
-import customParseFormat from "dayjs/plugin/customParseFormat";
+import dayjs from 'dayjs';
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
+import utc from 'dayjs/plugin/utc';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
 
 dayjs.extend(isSameOrBefore);
 dayjs.extend(utc);
@@ -12,7 +12,7 @@ dayjs.extend(customParseFormat);
  * ISO 8601 timestamp format used throughout the app.
  * Example: "2025-04-21T10:00:00Z"
  */
-export const TIMESTAMPFORMAT = "YYYY-MM-DDTHH:mm:ss[Z]";
+export const TIMESTAMPFORMAT = 'YYYY-MM-DDTHH:mm:ss[Z]';
 /**
  * Rounds a given Day.js object up to the nearest 15-minute mark.
  *
@@ -25,11 +25,11 @@ export const TIMESTAMPFORMAT = "YYYY-MM-DDTHH:mm:ss[Z]";
  */
 
 export function roundUpToNearest15(date: dayjs.Dayjs) {
-	const mins = date.minute();
-	const remainder = mins % 15;
-	return remainder === 0
-		? date.startOf("minute")
-		: date.add(15 - remainder, "minute").startOf("minute");
+  const mins = date.minute();
+  const remainder = mins % 15;
+  return remainder === 0
+    ? date.startOf('minute')
+    : date.add(15 - remainder, 'minute').startOf('minute');
 }
 /**
  * Generates an array of time slot ranges between the given start and end times.
@@ -44,24 +44,18 @@ export function roundUpToNearest15(date: dayjs.Dayjs) {
  * console.log(slots); // [{ startTime: ..., endTime: ... }, ...]
  */
 
-export function getSlotRanges(
-	startTimeStr: string,
-	endTimeStr: string,
-	slotSize: number = 15
-) {
-	const start = dayjs(startTimeStr);
-	const end = dayjs(endTimeStr);
-	const slots = [];
-	let current = start;
-	while (current.add(slotSize, "minute").isSameOrBefore(end)) {
-		const slotStart = current.format("YYYY-MM-DDTHH:mm:ss[Z]");
-		const slotEnd = current
-			.add(slotSize, "minute")
-			.format("YYYY-MM-DDTHH:mm:ss[Z]");
-		slots.push({ startTime: slotStart, endTime: slotEnd });
-		current = current.add(slotSize, "minute");
-	}
-	return slots;
+export function getSlotRanges(startTimeStr: string, endTimeStr: string, slotSize: number = 15) {
+  const start = dayjs(startTimeStr);
+  const end = dayjs(endTimeStr);
+  const slots = [];
+  let current = start;
+  while (current.add(slotSize, 'minute').isSameOrBefore(end)) {
+    const slotStart = current.format('YYYY-MM-DDTHH:mm:ss[Z]');
+    const slotEnd = current.add(slotSize, 'minute').format('YYYY-MM-DDTHH:mm:ss[Z]');
+    slots.push({ startTime: slotStart, endTime: slotEnd });
+    current = current.add(slotSize, 'minute');
+  }
+  return slots;
 }
 
 /**
@@ -78,5 +72,5 @@ export function getSlotRanges(
  */
 
 export const isValidTimeStamp = (time: string) => {
-	return dayjs(time, TIMESTAMPFORMAT, true).isValid();
+  return dayjs(time, TIMESTAMPFORMAT, true).isValid();
 };

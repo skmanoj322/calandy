@@ -1,4 +1,4 @@
-import { prisma } from "@/prisma";
+import { prisma } from '@/prisma';
 
 /**
  * Retrieves a user's working hours, including start time, end time, and available working days.
@@ -14,19 +14,19 @@ import { prisma } from "@/prisma";
  */
 
 export const getWorkingHours = async ({ userId }: { userId: number }) => {
-	const workingHours = await prisma.user.findUnique({
-		where: { id: userId },
-		select: {
-			username: true,
-			userConstraints: {
-				select: {
-					startTime: true,
-					endTime: true,
-					days: true,
-				},
-			},
-		},
-	});
+  const workingHours = await prisma.user.findUnique({
+    where: { id: userId },
+    select: {
+      username: true,
+      userConstraints: {
+        select: {
+          startTime: true,
+          endTime: true,
+          days: true,
+        },
+      },
+    },
+  });
 
-	return workingHours;
+  return workingHours;
 };

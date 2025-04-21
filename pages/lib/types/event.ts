@@ -1,6 +1,6 @@
 export type EventType = {
-	userId: number;
-	title: string;
-	description: string;
-	slotSize: number;
+  userId: number;
+  title: string;
+  description: string;
+  slotSize: number;
 };

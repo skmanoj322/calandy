@@ -1,4 +1,4 @@
-import { getSlotRanges } from "./slots";
+import { getSlotRanges } from './slots';
 
 /**
  * Converts a date and time into an ISO 8601 timestamp string with an optional timezone.
@@ -16,15 +16,15 @@ import { getSlotRanges } from "./slots";
  */
 
 export const convertToISO = ({
-	date,
-	time,
-	timezone = "Z",
+  date,
+  time,
+  timezone = 'Z',
 }: {
-	date: string;
-	time: string;
-	timezone?: string;
+  date: string;
+  time: string;
+  timezone?: string;
 }) => {
-	return `${date}T${time}:00Z`;
+  return `${date}T${time}:00Z`;
 };
 
 /**
@@ -53,20 +53,20 @@ export const convertToISO = ({
  */
 
 export const StartAndEndTimeStampWithSlots = ({
-	start,
-	end,
-	date,
-	slotSize,
+  start,
+  end,
+  date,
+  slotSize,
 }: {
-	start: string;
-	end: string;
-	date: string;
-	slotSize: number;
+  start: string;
+  end: string;
+  date: string;
+  slotSize: number;
 }) => {
-	const startTimeStamp = convertToISO({ date, time: start });
-	const endTimeStamp = convertToISO({ date, time: end });
+  const startTimeStamp = convertToISO({ date, time: start });
+  const endTimeStamp = convertToISO({ date, time: end });
 
-	const slots = getSlotRanges(startTimeStamp, endTimeStamp, slotSize);
+  const slots = getSlotRanges(startTimeStamp, endTimeStamp, slotSize);
 
-	return { startTimeStamp, endTimeStamp, slots };
+  return { startTimeStamp, endTimeStamp, slots };
 };

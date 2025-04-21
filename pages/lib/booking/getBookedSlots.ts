@@ -1,16 +1,16 @@
-import { prisma } from "@/prisma";
-import { Prisma } from "@prisma/client";
-import { responseWrapper } from "../utils/responseWrapper";
+import { prisma } from '@/prisma';
+import { Prisma } from '@prisma/client';
+import { responseWrapper } from '../utils/responseWrapper';
 
 const userEmail = Prisma.validator<Prisma.BookingSelect>()({
-	startTime: true,
-	endTime: true,
+  startTime: true,
+  endTime: true,
 });
 
 const bookingSlot = Prisma.validator<Prisma.EventDefaultArgs>()({
-	select: {
-		booking: true,
-	},
+  select: {
+    booking: true,
+  },
 });
 type BookingSlot = Prisma.EventGetPayload<typeof bookingSlot>;
 
@@ -28,40 +28,40 @@ type BookingSlot = Prisma.EventGetPayload<typeof bookingSlot>;
  */
 
 export const getBookedSlots = async ({ eventId }: { eventId: string }) => {
-	const bookedSlot = await prisma.event.findUnique({
-		where: {
-			eventId,
-		},
-		select: {
-			userId: true,
-			slotSize: true,
-			booking: {
-				select: {
-					id: true,
-					startTime: true,
-					endTime: true,
-				},
-			},
-		},
-	});
+  const bookedSlot = await prisma.event.findUnique({
+    where: {
+      eventId,
+    },
+    select: {
+      userId: true,
+      slotSize: true,
+      booking: {
+        select: {
+          id: true,
+          startTime: true,
+          endTime: true,
+        },
+      },
+    },
+  });
 
-	return bookedSlot;
+  return bookedSlot;
 };
 
 export const getBlockSlots = async ({ eventId }: { eventId: string }) => {
-	try {
-		const bookedSlot = await getBookedSlots({ eventId });
-		return responseWrapper<EventWithSlots>({
-			data: bookedSlot,
-			message: "",
-			status: true,
-		});
-	} catch (error) {
-		return responseWrapper({
-			data: {},
-			message: `${error}`,
-			status: false,
-		});
-	}
+  try {
+    const bookedSlot = await getBookedSlots({ eventId });
+    return responseWrapper<EventWithSlots>({
+      data: bookedSlot,
+      message: '',
+      status: true,
+    });
+  } catch (error) {
+    return responseWrapper({
+      data: {},
+      message: `${error}`,
+      status: false,
+    });
+  }
 };
 export type EventWithSlots = Prisma.PromiseReturnType<typeof getBookedSlots>;

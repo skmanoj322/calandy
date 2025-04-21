@@ -1,4 +1,4 @@
-import { prisma } from "@/prisma";
+import { prisma } from '@/prisma';
 
 /**
  * Retrieves all events created by a specific user using their user ID.
@@ -14,15 +14,15 @@ import { prisma } from "@/prisma";
  */
 
 export const getAllEventbyUserId = async ({ userId }: { userId: number }) => {
-	const allEvent = await prisma.user.findUnique({
-		where: {
-			id: userId,
-		},
-		select: {
-			event: true,
-			password: false,
-			userConstraints: false,
-		},
-	});
-	return allEvent;
+  const allEvent = await prisma.user.findUnique({
+    where: {
+      id: userId,
+    },
+    select: {
+      event: true,
+      password: false,
+      userConstraints: false,
+    },
+  });
+  return allEvent;
 };

@@ -1,9 +1,9 @@
 type ResponseWrapper<T> = {
-	status: string;
-	message: string;
-	response: {
-		data: T;
-	};
+  status: string;
+  message: string;
+  response: {
+    data: T;
+  };
 };
 /**
  * Wraps the given data, status, and message into a standard API response format.
@@ -26,17 +26,17 @@ type ResponseWrapper<T> = {
  */
 
 export const responseWrapper = <T>({
-	data,
-	status,
-	message,
+  data,
+  status,
+  message,
 }: {
-	data: T;
-	status: boolean;
-	message: string;
+  data: T;
+  status: boolean;
+  message: string;
 }) => {
-	return {
-		status,
-		response: { data },
-		message,
-	};
+  return {
+    status,
+    response: { data },
+    message,
+  };
 };

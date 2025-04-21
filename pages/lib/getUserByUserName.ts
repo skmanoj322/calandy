@@ -1,4 +1,4 @@
-import { prisma } from "@/prisma";
+import { prisma } from '@/prisma';
 
 /**
  * Fetches a user record from the database by their username.
@@ -16,11 +16,11 @@ import { prisma } from "@/prisma";
  */
 
 export const getUserByUserName = async ({ username }: { username: string }) => {
-	const user = await prisma.user.findUnique({
-		where: {
-			username: username,
-		},
-	});
+  const user = await prisma.user.findUnique({
+    where: {
+      username: username,
+    },
+  });
 
-	return user;
+  return user;
 };

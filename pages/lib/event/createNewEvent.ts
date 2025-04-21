@@ -1,5 +1,5 @@
-import { prisma } from "@/prisma";
-import { EventType } from "../types/event";
+import { prisma } from '@/prisma';
+import { EventType } from '../types/event';
 
 /**
  * Creates a new event in the database using the provided event details.
@@ -14,9 +14,9 @@ import { EventType } from "../types/event";
  */
 
 export const createNewEvent = async (event: EventType) => {
-	const newEvent = await prisma.event.create({
-		data: { ...event },
-	});
+  const newEvent = await prisma.event.create({
+    data: { ...event },
+  });
 
-	return newEvent;
+  return newEvent;
 };

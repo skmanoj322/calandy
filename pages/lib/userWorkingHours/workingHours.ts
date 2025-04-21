@@ -1,4 +1,4 @@
-import { prisma } from "@/prisma";
+import { prisma } from '@/prisma';
 
 /**
  * Retrieves the working hours (start and end time) for a specific user.
@@ -14,21 +14,21 @@ import { prisma } from "@/prisma";
  */
 
 export const userWorkingHours = async ({ userId }: { userId: number }) => {
-	const workingHours = await prisma.user.findUnique({
-		where: {
-			id: userId,
-		},
-		select: {
-			userConstraints: {
-				select: {
-					startTime: true,
-					endTime: true,
-				},
-			},
-		},
-	});
+  const workingHours = await prisma.user.findUnique({
+    where: {
+      id: userId,
+    },
+    select: {
+      userConstraints: {
+        select: {
+          startTime: true,
+          endTime: true,
+        },
+      },
+    },
+  });
 
-	return workingHours;
+  return workingHours;
 };
 
 /**
@@ -52,33 +52,33 @@ export const userWorkingHours = async ({ userId }: { userId: number }) => {
  */
 
 export const setWorkinghours = async ({
-	userId,
-	endTime,
-	startTime,
+  userId,
+  endTime,
+  startTime,
 }: {
-	userId: number;
-	endTime: string;
-	startTime: string;
+  userId: number;
+  endTime: string;
+  startTime: string;
 }) => {
-	const setworkingHour = await prisma.user.update({
-		where: { id: userId },
-		data: {
-			userConstraints: {
-				update: {
-					endTime,
-					startTime,
-				},
-			},
-		},
-		select: {
-			userConstraints: {
-				select: {
-					endTime: true,
-					startTime: true,
-				},
-			},
-		},
-	});
+  const setworkingHour = await prisma.user.update({
+    where: { id: userId },
+    data: {
+      userConstraints: {
+        update: {
+          endTime,
+          startTime,
+        },
+      },
+    },
+    select: {
+      userConstraints: {
+        select: {
+          endTime: true,
+          startTime: true,
+        },
+      },
+    },
+  });
 
-	return setworkingHour;
+  return setworkingHour;
 };

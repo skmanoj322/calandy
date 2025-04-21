@@ -1,5 +1,5 @@
-import { prisma } from "@/prisma";
-import { responseWrapper } from "../utils/responseWrapper";
+import { prisma } from '@/prisma';
+import { responseWrapper } from '../utils/responseWrapper';
 
 /**
  * Retrieves all bookings for events created by a specific user.
@@ -16,19 +16,19 @@ import { responseWrapper } from "../utils/responseWrapper";
  */
 
 export const getBookingById = async ({ userId }: { userId: number }) => {
-	try {
-		const getAllBookingByusers = await prisma.user.findUnique({
-			where: { id: userId },
-			select: {
-				event: {
-					include: {
-						booking: true,
-					},
-				},
-			},
-		});
-		return getAllBookingByusers;
-	} catch (error) {
-		return error;
-	}
+  try {
+    const getAllBookingByusers = await prisma.user.findUnique({
+      where: { id: userId },
+      select: {
+        event: {
+          include: {
+            booking: true,
+          },
+        },
+      },
+    });
+    return getAllBookingByusers;
+  } catch (error) {
+    return error;
+  }
 };

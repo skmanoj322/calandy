@@ -51,7 +51,8 @@ const getAvilableSlots = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const { slotSize } = bookedSlot;
   const { booking } = bookedSlot;
-
+  //  here we compare every slot according to its size weather it lie in host working time and day
+  // and return the avilable slots
   const timeSlot = timeSlotFilterHandler({
     booking,
     initialStartTime,
@@ -73,6 +74,7 @@ const getAvilableSlots = async (req: NextApiRequest, res: NextApiResponse) => {
   );
 };
 
+// this function take care of the previous booking and compare weather booking interfere with free slot if yes, the it remove that slot
 export const isConflictWithBookingTime = ({
   booking,
   startTime,

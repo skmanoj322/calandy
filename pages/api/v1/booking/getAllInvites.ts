@@ -3,7 +3,7 @@ import { responseWrapper } from '@/pages/lib/utils/responseWrapper';
 import { prisma } from '@/prisma';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-// Work in progress
+// gets you all the invites of the user
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { userId } = extractUserIdfromreq(req);

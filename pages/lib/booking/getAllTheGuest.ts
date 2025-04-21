@@ -1,6 +1,6 @@
 import { prisma } from '@/prisma';
 import { responseWrapper } from '../utils/responseWrapper';
-
+// get all the guest form booking id
 export const getAlltheGuest = async ({ bookingId }: { bookingId: string }) => {
   try {
     const getAlltheguestFromBooking = await prisma.booking.findUnique({
@@ -28,8 +28,8 @@ export const getAlltheGuest = async ({ bookingId }: { bookingId: string }) => {
     });
   } catch (error) {
     return responseWrapper({
-      data: error,
-      message: '',
+      data: {},
+      message: `${error}`,
       status: true,
     });
   }

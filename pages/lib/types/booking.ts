@@ -1,4 +1,4 @@
-interface CreateBooking {
+export interface CreateBooking {
   eventId: number;
   startTime: string;
   endTime: string;

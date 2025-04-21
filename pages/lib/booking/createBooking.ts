@@ -2,6 +2,7 @@ import { prisma } from '@/prisma';
 import { responseWrapper } from '../utils/responseWrapper';
 import { getEventById } from '../event/getEventbyEventId';
 import { getUserByUserName } from '../getUserByUserName';
+import { CreateBooking } from '../types/booking';
 
 /**
  * Creates a new booking for an event by associating multiple users (guests).

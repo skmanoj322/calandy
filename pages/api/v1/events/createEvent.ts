@@ -1,4 +1,3 @@
-import { routeProtector } from '@/pages/lib/auth/routeProtector';
 import { createNewEvent } from '@/pages/lib/event/createNewEvent';
 import { responseWrapper } from '@/pages/lib/utils/responseWrapper';
 import { NextApiRequest, NextApiResponse } from 'next';
@@ -8,12 +7,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return res.status(408).send({ message: 'Only post method is allowed' });
   }
   const userId = req.headers['user_id'];
-  const username = req.headers['username'];
   const stringToNumber = Number(userId);
   const { title, description, slotSize } = req.body;
   let NewEvent;
   if (title && description && slotSize && typeof userId === 'string') {
     try {
+      // it write the data in db
       const data = await createNewEvent({
         userId: stringToNumber,
         description,

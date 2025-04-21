@@ -1,6 +1,6 @@
 import { getAlltheGuest } from '@/pages/lib/booking/getAllTheGuest';
 import { NextApiRequest, NextApiResponse } from 'next';
-
+// simple query to db which will get all the Guest of that booking slot
 const getAllInviteesOFTheBooking = async (req: NextApiRequest, res: NextApiResponse) => {
   const { bookingId } = req.query;
   if (!bookingId || Array.isArray(bookingId)) {

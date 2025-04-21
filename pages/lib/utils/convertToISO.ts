@@ -15,15 +15,7 @@ import { getSlotRanges } from './slots';
  * console.log(iso); // "2025-04-21T10:00:00Z"
  */
 
-export const convertToISO = ({
-  date,
-  time,
-  timezone = 'Z',
-}: {
-  date: string;
-  time: string;
-  timezone?: string;
-}) => {
+export const convertToISO = ({ date, time }: { date: string; time: string; timezone?: string }) => {
   return `${date}T${time}:00Z`;
 };
 

@@ -2,18 +2,6 @@ import { prisma } from '@/prisma';
 import { Prisma } from '@prisma/client';
 import { responseWrapper } from '../utils/responseWrapper';
 
-const userEmail = Prisma.validator<Prisma.BookingSelect>()({
-  startTime: true,
-  endTime: true,
-});
-
-const bookingSlot = Prisma.validator<Prisma.EventDefaultArgs>()({
-  select: {
-    booking: true,
-  },
-});
-type BookingSlot = Prisma.EventGetPayload<typeof bookingSlot>;
-
 /**
  * Fetches an event's slot-related information including bookings made for that event.
  *

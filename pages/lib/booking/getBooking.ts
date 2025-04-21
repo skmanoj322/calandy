@@ -1,5 +1,4 @@
 import { prisma } from '@/prisma';
-import { responseWrapper } from '../utils/responseWrapper';
 
 /**
  * Retrieves all bookings for events created by a specific user.

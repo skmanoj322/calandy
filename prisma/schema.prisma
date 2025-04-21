@@ -1,0 +1,72 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum BookingStatus {
+  CONFIRMED
+  CANCELLED
+  PENDING
+}
+model User{
+  id Int @id @default(autoincrement())
+  UserId String @default(uuid())
+  username String @unique
+  password String
+  email String? @unique
+  createdAt DateTime @default(now())
+  userConstraints UserConstraints?
+  event Event[]
+  bookingGuest BookingGuest[]
+}
+model UserConstraints{
+  id Int @default(autoincrement()) @id
+  user  User @relation(fields: [userId],references: [id])
+  userId Int  @unique
+  startTime String?  @default("09:00:00Z")//HH:mm:ssZ
+  endTime String?    @default("17:00:00Z")
+  days String?       @default("[1,2,3,4,5]") 
+  @@index([userId])
+}
+model Event {
+  id Int @default(autoincrement())  @id
+  eventId String @default(uuid()) @unique
+  title String 
+  description String
+  slotSize Int
+  user User @relation(fields: [userId],references: [id])
+  userId Int
+  booking Booking[]
+  @@index([userId])
+}
+
+model Booking {
+  id Int @default(autoincrement()) @id
+  bookingId String @default(uuid()) @unique
+  startTime String
+  endTime String
+  event Event @relation(fields: [eventId],references: [id],onDelete: Cascade)
+  eventId Int  
+  bookingGuest BookingGuest[]
+  @@index([eventId])
+}
+
+model BookingGuest{
+  id Int @default( autoincrement()) @id
+  booking Booking @relation(fields: [bookingId],references: [id] ,onDelete: Cascade)
+  guest User @relation(fields: [guestId],references: [id],onDelete: Cascade)
+  guestId Int 
+  bookingId Int
+  bookingStatus BookingStatus @default(PENDING)
+  @@index([bookingId])
+}

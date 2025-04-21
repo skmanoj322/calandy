@@ -1,40 +1,132 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+## 📜 Available Scripts
 
-## Getting Started
+This project uses **Yarn** as its package manager. Below are the available scripts for development, production, and database management.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### 🚀 Development
+
+| Script      | Description                                                        |
+| ----------- | ------------------------------------------------------------------ |
+| `yarn dev`  | Starts the Next.js development server at `http://localhost:3000`.  |
+| `yarn lint` | Runs ESLint to analyze and fix code formatting and quality issues. |
+
+---
+
+### ⚙️ Production
+
+| Script       | Description                                                |
+| ------------ | ---------------------------------------------------------- |
+| `yarn build` | Builds the Next.js app for production.                     |
+| `yarn start` | Starts the production server. Run this after `yarn build`. |
+
+---
+
+### 🗄️ Prisma Database Commands
+
+| Script             | Description                                                             |
+| ------------------ | ----------------------------------------------------------------------- |
+| `yarn db-migrate`  | Applies schema changes using `prisma migrate dev`.                      |
+| `yarn db-generate` | Regenerates Prisma Client from your schema.                             |
+| `yarn db-studio`   | Opens Prisma Studio, a visual database browser.                         |
+| `yarn db-reset`    | Drops, re-creates, and migrates the database (useful for fresh setups). |
+| `yarn db-seed`     | Runs the seed script to populate initial data in the database.          |
+
+---
+
+### 🌱 Seed Script Configuration
+
+Your seeding setup is defined in `package.json`:
+
+```json
+"prisma": {
+  "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This means running:
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```bash
+yarn db-seed
+```
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Will execute the file:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+```
+prisma/seed.ts
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+> 💡 **Tip:** Make sure you've installed `ts-node` if you're running seeds written in TypeScript:
+>
+> ```bash
+> yarn add -D ts-node
+> ```
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+### 🐳 Docker Setup For database setup
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+This project includes a `docker-compose.yaml` file in the `prisma/` directory for spinning up a local **PostgreSQL** database quickly.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+#### 🔧 How to start the DB:
 
-## Deploy on Vercel
+```bash
+cd prisma
+docker-compose up -d
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+> This will launch a local Postgres container (usually on port `5432`). Make sure your `.env` file has a matching `DATABASE_URL`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+#### 🧹 How to stop and remove the container:
+
+```bash
+docker-compose down
+```
+
+#### ✅ Example `DATABASE_URL` for `.env`
+
+```env
+DATABASE_URL=postgresql://postgres:postgres@localhost:5432/postgres
+```
+
+---
+
+### 🌿 Branching Strategy
+
+To maintain consistency and clarity in version control, follow this branching strategy:
+
+-   For features:
+
+```
+    calandly/feature/<feature_name>
+```
+
+-   For issues:
+    ```
+    calandly/issue/<issue_number>
+    ```
+
+#### ✅ Example Workflow
+
+1. Create a branch:
+
+    ```bash
+    git checkout -b calandly/feature/user-authentication
+    ```
+
+2. Add and commit your changes:
+
+    ```bash
+    git add .
+    git commit -m "Initial commit for user authentication feature"
+    ```
+
+3. Push the branch:
+
+    ```bash
+    git push origin calandly/feature/user-authentication
+    ```
+
+4. Create a pull request (PR) and request a review.
+
+> 📌 This strategy helps organize contributions by context (feature vs issue) and makes PRs easier to review and manage.

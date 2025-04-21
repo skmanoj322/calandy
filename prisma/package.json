@@ -1,0 +1,17 @@
+{
+	"name": "prisma",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "",
+		"db-studio": "",
+		"db-migrate": "npx prisma migrate dev",
+		"seed": "npx ts-node/esm seed.ts",
+		"db-reset": "npx prisma migrate reset"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"type": "commonjs"
+}

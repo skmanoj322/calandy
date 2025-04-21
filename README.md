@@ -6,21 +6,20 @@ This project uses **Yarn** as its package manager. Below are the available scrip
 
 ### 🚀 Development
 
-| Script      | Description                                                        |
-| ----------- | ------------------------------------------------------------------ |
-| `yarn dev`  | Starts the Next.js development server at `http://localhost:3000`.  |
-| `yarn lint` | Runs ESLint to analyze and fix code formatting and quality issues. |
+| Script     | Description                                                       |
+| ---------- | ----------------------------------------------------------------- |
+| `yarn dev` | Starts the Next.js development server at `http://localhost:3000`. |
 
 ---
 
-### ⚙️ Production
+<!-- ### ⚙️ Production
 
 | Script       | Description                                                |
 | ------------ | ---------------------------------------------------------- |
 | `yarn build` | Builds the Next.js app for production.                     |
 | `yarn start` | Starts the production server. Run this after `yarn build`. |
 
----
+--- -->
 
 ### 🗄️ Prisma Database Commands
 
@@ -98,12 +97,12 @@ To maintain consistency and clarity in version control, follow this branching st
 -   For features:
 
 ```
-    calandly/feature/<feature_name>
+    feature/<feature_name>
 ```
 
 -   For issues:
     ```
-    calandly/issue/<issue_number>
+    issue/<issue_number>
     ```
 
 #### ✅ Example Workflow
@@ -111,7 +110,7 @@ To maintain consistency and clarity in version control, follow this branching st
 1. Create a branch:
 
     ```bash
-    git checkout -b calandly/feature/user-authentication
+    git checkout -b feature/user-authentication
     ```
 
 2. Add and commit your changes:
